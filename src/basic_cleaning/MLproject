@@ -1,0 +1,34 @@
+name: basic_cleaning
+conda_env: conda.yml
+
+entry_points:
+  main:
+    parameters:
+
+      input_artifact:
+        description: name of artifact that we will apply cleaning to
+        type: string
+
+      output_artifact:
+        description: name of artifact after cleaning has been applied
+        type: string
+
+      output_type:
+        description: type for the artifact after cleaning step i.e data,raw_data
+        type: string
+
+      output_description:
+        description: description of the output artifact
+        type: string
+
+      min_price:
+        description: minimum threshold for price in the dataset, values below will be dropped
+        type: string
+
+      max_price:
+        description: maxmimum threshold for price in the dataset, values above will be dropped
+        type: string
+
+
+    command: >-
+        python run.py  --input_artifact {input_artifact}  --output_artifact {output_artifact}  --output_type {output_type}  --output_description {output_description}  --min_price {min_price}  --max_price {max_price} 
