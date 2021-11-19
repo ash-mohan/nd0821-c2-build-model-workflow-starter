@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import mlflow
 import json
 
+import tempfile
 import pandas as pd
 import numpy as np
 from mlflow.models import infer_signature
@@ -90,17 +91,23 @@ def go(args):
 
     logger.info("Exporting model")
 
+
     # Save model package in the MLFlow sklearn format
     if os.path.exists("random_forest_dir"):
+        logger.info("Path exists..cleaning up directory")
         shutil.rmtree("random_forest_dir")
 
 
     ######################################
     # Save the sk_pipe pipeline as a mlflow.sklearn model in the directory "random_forest_dir"
     # HINT: use mlflow.sklearn.save_model
+
+    random_forest_dir = os.path.join("./random_forest_dir", args.output_artifact)
     mlflow.sklearn.save_model(
         sk_pipe,
-        "random_forest_dir"
+        random_forest_dir,
+        serialization_format=mlflow.sklearn.SERIALIZATION_FORMAT_CLOUDPICKLE,
+        input_example=X_val.iloc[:2],
     )
 
     # Upload the model we just exported to W&B
@@ -112,11 +119,12 @@ def go(args):
         args.output_artifact,
         type="model_export",
         description="Random Forest pipeline export",
-        metadata=args.rf_config
+        metadata=rf_config
     )
-    artifact.add_dir("random_forest_dir")
+    artifact.add_dir(random_forest_dir)
 
     run.log_artifact(artifact)
+
 
     # Plot feature importance
     fig_feat_imp = plot_feature_importance(sk_pipe, processed_features)
@@ -125,8 +133,7 @@ def go(args):
     # Here we save r_squared under the "r2" key
     run.summary['r2'] = r_squared
     # Now log the variable "mae" under the key "mae".
-    # YOUR CODE HERE
-    ######################################
+    run.summary['mae'] = mae
 
     # Upload to W&B the feture importance visualization
     run.log(
