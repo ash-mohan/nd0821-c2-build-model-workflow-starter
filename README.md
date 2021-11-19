@@ -6,6 +6,9 @@ to be retrained with the same cadence, necessitating an end-to-end pipeline that
 
 In this project you will build such a pipeline.
 
+# Submission
+- wandb: https://wandb.ai/ash-mohan/nyc_airbnb/overview?workspace=user-ash-mohan
+- github: https://github.com/ash-mohan/nd0821-c2-build-model-workflow-starter
 ## Table of contents
 
 - [Introduction](#build-an-ML-Pipeline-for-Short-Term-Rental-Prices-in-NYC)
@@ -30,6 +33,7 @@ In this project you will build such a pipeline.
   * [Release the pipeline](#release-the-pipeline)
   * [Train the model on a new data sample](#train-the-model-on-a-new-data-sample)
 - [Cleaning up](#cleaning-up)
+- [Submission](#submission)
 
 ## Preliminary steps
 ### Fork the Starter kit
