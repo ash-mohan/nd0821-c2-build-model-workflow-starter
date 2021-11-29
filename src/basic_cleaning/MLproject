@@ -23,11 +23,11 @@ entry_points:
 
       min_price:
         description: minimum threshold for price in the dataset, values below will be dropped
-        type: string
+        type: float
 
       max_price:
         description: maxmimum threshold for price in the dataset, values above will be dropped
-        type: string
+        type: float
 
 
     command: >-
