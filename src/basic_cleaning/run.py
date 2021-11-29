@@ -84,14 +84,14 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "--min_price", 
-        type=int,## INSERT TYPE HERE: str, float or int,
+        type=float,## INSERT TYPE HERE: str, float or int,
         help="minimum price to allow in data",## INSERT DESCRIPTION HERE,
         required=True
     )
 
     parser.add_argument(
         "--max_price", 
-        type=int,## INSERT TYPE HERE: str, float or int,
+        type=float,## INSERT TYPE HERE: str, float or int,
         help="maximum price to allow in data",## INSERT DESCRIPTION HERE,
         required=True
     )
